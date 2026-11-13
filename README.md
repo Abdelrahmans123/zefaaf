@@ -119,6 +119,6 @@ Coverage includes simultaneous last-spot purchases, duplicate and stale notifica
 
 ## Design and submission
 
-See [docs/architecture.md](docs/architecture.md) for the SOLID structure and design patterns. See [docs/approach.md](docs/approach.md) for correctness guarantees, trade-offs, provider requirements, and failure recovery. The original brief is retained in `backend_developer_task (1).md`.
+See [docs/architecture.md](docs/architecture.md) for the SOLID structure and design patterns. See [docs/approach.md](docs/approach.md) for correctness guarantees, trade-offs, provider requirements, and failure recovery.
 
 This workspace has no configured Git repository or remote. The source is ready to commit and push to your own GitHub repository; no repository URL has been created.

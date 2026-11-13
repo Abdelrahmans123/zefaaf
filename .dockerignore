@@ -1,0 +1,8 @@
+vendor
+.git
+.env
+.phpunit.cache
+database/*.sqlite*
+storage/logs/*
+storage/framework/views/*
+bootstrap/cache/*.php

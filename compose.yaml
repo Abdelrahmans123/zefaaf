@@ -1,0 +1,39 @@
+x-app: &app
+  build: .
+  environment:
+    APP_ENV: local
+    APP_KEY: base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+    APP_DEBUG: "true"
+    DB_CONNECTION: mysql
+    DB_HOST: db
+    DB_DATABASE: zefaaf
+    DB_USERNAME: zefaaf
+    DB_PASSWORD: secret
+    PAYMENT_SIMULATOR_ENABLED: "true"
+    PAYMENT_WEBHOOK_SECRET: local-demo-webhook-secret-change-in-production
+  depends_on:
+    db:
+      condition: service_healthy
+services:
+  db:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: zefaaf
+      MYSQL_USER: zefaaf
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: local-root-secret
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: [CMD-SHELL, 'mysqladmin ping -h localhost -uroot -p"$$MYSQL_ROOT_PASSWORD" --silent']
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  app:
+    <<: *app
+    ports: ["8000:8000"]
+  scheduler:
+    <<: *app
+    command: [php, artisan, schedule:work]
+volumes:
+  mysql-data:
